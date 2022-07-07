@@ -1,0 +1,111 @@
+<button class="btn btn-primary" (click)="openAddContainerModal()">add Container</button>
+<button class="btn btn-danger" (click)="logOut()">Log Out</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">weight</th>
+        
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">StartHarbor</th>
+        <th scope="col">EndHarbor</th>
+        <th scope="col">Tools</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let container of containers'>
+        <td>{{container.container_id}}</td>
+        <td>{{container.poids}}</td>
+        <td>{{container.time_depart}}</td>
+        <td>{{container.time_arrive}}</td>
+        <td>{{container.port_depart}}</td>
+        <td>{{container.port_arrive}}</td>
+
+        <td>
+            <button class="btn btn-info" (click)="openUpdateContainerModal(container)"><i class="fa-solid fa-pen-to-square"></i>Update</button>
+            <button class="btn btn-danger" (click)="openDeleteContainerModal(container.container_id)"><i class="fa-solid fa-trash"></i>Delete</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <div id="modal-add-container-form" class="modal-add-container-form modal fade" >
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2>{{title}}</h2>
+              </div>
+              
+              <div class="modal-body">
+                <form [formGroup]="form" >
+                    <div class="form-group">
+                      <label >Weight</label>
+                      <input type="number"formControlName="poids" [ngModel]="container.poids" class="form-control" id="email" >
+                    </div>
+                    <div class="form-group">
+                      <label > Start Harbor </label>
+                      <input [ngModel]="container.port_depart" type="text" formControlName="port_depart" class="form-control" id="pwd">
+                    </div>
+                    <div class="form-group">
+                        <label > End Harbor </label>
+                        <input [ngModel]="container.port_arrive" type="text"formControlName="port_arrive" class="form-control" id="pwd">
+                      </div>
+                      <div class="form-group">
+                        <label > Start time </label>
+                        <input  type="text" [ngModel]="container.time_depart" formControlName="time_depart"class="form-control" id="pwd">
+                      </div>
+                      <div class="form-group">
+                        <label > End Time</label>
+                        <input  type="text"[ngModel]="container.time_arrive" formControlName="time_arrive"class="form-control" >
+                      </div>
+                    
+                    
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button *ngIf="title == 'Add Container'" class="btn btn-primary" (click)="Add()" >Add</button>
+                  <button *ngIf="title == 'Update Container'" class="btn btn-primary" (click)="updateContainer()" >Update</button>
+                  <button class="btn btn-danger" (click)="closeModal('.modal-add-container-form')">Close</button>
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+  <div id="delete-container" class="delete-container modal fade" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Are you sure to delete ?</h2>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="deleteContainer()" >Yes</button>
+                <button class="btn btn-danger" (click)="closeModal('.delete-container')">No</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="login" class="login modal fade" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>You have to login first</h2>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="redirectToLogin()" >Login</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
